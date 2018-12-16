@@ -61,10 +61,10 @@
             this.txtGenre = new System.Windows.Forms.TextBox();
             this.genre_label = new System.Windows.Forms.Label();
             this.txtPlot = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.UpdateMovie = new System.Windows.Forms.Button();
             this.plot_lable = new System.Windows.Forms.Label();
             this.txtCopies = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.DeleteMovie = new System.Windows.Forms.Button();
             this.copies_label = new System.Windows.Forms.Label();
             this.txtCost = new System.Windows.Forms.TextBox();
             this.btnVideoAdd = new System.Windows.Forms.Button();
@@ -107,6 +107,7 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Customer Details";
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // LastName_txtbox
             // 
@@ -136,7 +137,7 @@
             this.btnDel.TabIndex = 8;
             this.btnDel.Text = "Delete";
             this.btnDel.UseVisualStyleBackColor = true;
-            this.btnDel.Click += new System.EventHandler(this.btnDel_Click);
+            this.btnDel.Click += new System.EventHandler(this.btnDelCustomer_Click);
             // 
             // btnUpdate
             // 
@@ -160,7 +161,7 @@
             this.btnAdd.TabIndex = 6;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            this.btnAdd.Click += new System.EventHandler(this.BtnAddCustomer_Click);
             // 
             // phone_txtbox
             // 
@@ -302,7 +303,7 @@
             this.Delete.TabIndex = 8;
             this.Delete.Text = "Delete";
             this.Delete.UseVisualStyleBackColor = true;
-            this.Delete.Click += new System.EventHandler(this.Delete_Click);
+            this.Delete.Click += new System.EventHandler(this.DeleteRentedMovie_Click);
             // 
             // btnReturn
             // 
@@ -415,10 +416,10 @@
             this.groupBox3.Controls.Add(this.txtGenre);
             this.groupBox3.Controls.Add(this.genre_label);
             this.groupBox3.Controls.Add(this.txtPlot);
-            this.groupBox3.Controls.Add(this.button1);
+            this.groupBox3.Controls.Add(this.UpdateMovie);
             this.groupBox3.Controls.Add(this.plot_lable);
             this.groupBox3.Controls.Add(this.txtCopies);
-            this.groupBox3.Controls.Add(this.button2);
+            this.groupBox3.Controls.Add(this.DeleteMovie);
             this.groupBox3.Controls.Add(this.copies_label);
             this.groupBox3.Controls.Add(this.txtCost);
             this.groupBox3.Controls.Add(this.btnVideoAdd);
@@ -466,17 +467,17 @@
             this.txtPlot.Size = new System.Drawing.Size(209, 30);
             this.txtPlot.TabIndex = 15;
             // 
-            // button1
+            // UpdateMovie
             // 
-            this.button1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.button1.Location = new System.Drawing.Point(391, 148);
-            this.button1.Margin = new System.Windows.Forms.Padding(4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(140, 37);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "Update";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.UpdateMovie.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.UpdateMovie.Location = new System.Drawing.Point(391, 148);
+            this.UpdateMovie.Margin = new System.Windows.Forms.Padding(4);
+            this.UpdateMovie.Name = "UpdateMovie";
+            this.UpdateMovie.Size = new System.Drawing.Size(140, 37);
+            this.UpdateMovie.TabIndex = 8;
+            this.UpdateMovie.Text = "Update";
+            this.UpdateMovie.UseVisualStyleBackColor = true;
+            this.UpdateMovie.Click += new System.EventHandler(this.UpdateMovie_Click);
             // 
             // plot_lable
             // 
@@ -497,17 +498,17 @@
             this.txtCopies.TabIndex = 13;
             this.txtCopies.TextChanged += new System.EventHandler(this.txtCopies_TextChanged);
             // 
-            // button2
+            // DeleteMovie
             // 
-            this.button2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.button2.Location = new System.Drawing.Point(391, 96);
-            this.button2.Margin = new System.Windows.Forms.Padding(4);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(140, 42);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "Delete";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.DeleteMovie.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.DeleteMovie.Location = new System.Drawing.Point(391, 96);
+            this.DeleteMovie.Margin = new System.Windows.Forms.Padding(4);
+            this.DeleteMovie.Name = "DeleteMovie";
+            this.DeleteMovie.Size = new System.Drawing.Size(140, 42);
+            this.DeleteMovie.TabIndex = 7;
+            this.DeleteMovie.Text = "Delete";
+            this.DeleteMovie.UseVisualStyleBackColor = true;
+            this.DeleteMovie.Click += new System.EventHandler(this.DeleteVideo_Click);
             // 
             // copies_label
             // 
@@ -705,8 +706,8 @@
         private System.Windows.Forms.Button btnVideos;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Label rentalcost_lable;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button UpdateMovie;
+        private System.Windows.Forms.Button DeleteMovie;
         private System.Windows.Forms.Button btnVideoAdd;
         private System.Windows.Forms.Label year_label;
         private System.Windows.Forms.TextBox txtTitle;

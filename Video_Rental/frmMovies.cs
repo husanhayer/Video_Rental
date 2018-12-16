@@ -30,26 +30,28 @@ namespace Video_Rental
 
             try
             {
+                // object of databse class to acces the data from tables 
                 DbClass obj = new DbClass();
+                DataTable tbl = new DataTable();
+                DataTable tblnew = new DataTable();
+
+
                 String qry = "";
                 int y = 0;
                 qry = "select * from tbVideoCount ORDER BY  VCount DESC";
-                DataTable tbl = new DataTable();
-
-                DataTable tblnew = new DataTable();
-
+                
                 tbl = obj.getRecords(qry);
                 if (tbl.Rows.Count > 0)
                 {
+                    //create the column in the datattable  
                     tblnew.Columns.Add("Movie_id");
                     tblnew.Columns.Add("No_of_Times");
-                    for (y = 0; y < tbl.Rows.Count - 1; y++)
-                    {
+                    //pass the record to the table to display in the grid
                         DataRow row = tblnew.NewRow();
-                        row["Movie_id"] = Convert.ToString(tbl.Rows[y]["VID"]);
-                        row["No_of_Times"] = Convert.ToString(tbl.Rows[y]["VCount"]);
+                        row["Movie_id"] = Convert.ToString(tbl.Rows[0]["VID"]);
+                        row["No_of_Times"] = Convert.ToString(tbl.Rows[0]["VCount"]);
                         tblnew.Rows.Add(row);
-                    }
+                    
                     dataGridView1.DataSource = tblnew;
 
                 }

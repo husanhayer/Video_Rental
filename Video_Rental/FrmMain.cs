@@ -27,7 +27,7 @@ namespace Video_Rental
         int Cust_ID = 0, Rental_ID=0, Video_ID=0;
         int CustomerID = 0, RentalID = 0, VideoID = 0;
         // this btn is used to add the customer for booking the movie on rental 
-        private void btnAdd_Click(object sender, EventArgs e)
+        private void BtnAddCustomer_Click(object sender, EventArgs e)
         {
 
             try {
@@ -81,7 +81,7 @@ namespace Video_Rental
 
         }
 
-        private void btnDel_Click(object sender, EventArgs e)
+        private void btnDelCustomer_Click(object sender, EventArgs e)
         {
             try {
                 if (CustomerID >= 1)
@@ -324,7 +324,7 @@ namespace Video_Rental
 
         }
 
-        private void Delete_Click(object sender, EventArgs e)
+        private void DeleteRentedMovie_Click(object sender, EventArgs e)
         {
             
             try
@@ -368,8 +368,29 @@ namespace Video_Rental
                 qry = "";
                 qry = "select * from tbCustomer";
                 tbl = obj.getRecords(qry);
+
+                DataTable tblnew = new DataTable();
+
                 if (tbl.Rows.Count > 0) {
-                    dgvRecord.DataSource = tbl;
+                    tblnew.Columns.Add("Customer_id");
+                    tblnew.Columns.Add("Customer_Name");
+                    tblnew.Columns.Add("Customer_Address");
+                    tblnew.Columns.Add("Customer_PhoneNo");
+                    //using the statement to pass the record to the Table from the Data table 
+                    
+                    for (int y = 0; y < tbl.Rows.Count - 1; y++)
+                    {
+                        DataRow row = tblnew.NewRow();
+                        row["Customer_id"] = Convert.ToString(tbl.Rows[y]["ID"]);
+                        row["Customer_Name"] = Convert.ToString(tbl.Rows[y]["CustName"]);
+                        row["Customer_Address"] = Convert.ToString(tbl.Rows[y]["CustAdr"]);
+                        row["Customer_PhoneNo"] = Convert.ToString(tbl.Rows[y]["CustPhone"]);
+
+
+                        tblnew.Rows.Add(row);
+
+                    }
+                    dgvRecord.DataSource = tblnew;
                 }
                 // give the id to Cust_ID global to verify that we clicked on the customer or not 
                 Cust_ID = 1;
@@ -428,7 +449,7 @@ namespace Video_Rental
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void DeleteVideo_Click(object sender, EventArgs e)
         {
             try {
                 if (VideoID >= 1)
@@ -475,7 +496,7 @@ namespace Video_Rental
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void UpdateMovie_Click(object sender, EventArgs e)
         {
             try {
                 if (VideoID >= 1)
@@ -605,6 +626,7 @@ namespace Video_Rental
             {
                 //MessageBox.Show(dgvRecord.CurrentRow.Cells[0].Value.ToString());
 
+
                 VideoID = Convert.ToInt32(dgvRecord.CurrentRow.Cells[0].Value.ToString());
                 txtRating.Text = dgvRecord.CurrentRow.Cells[1].Value.ToString();
                 txtTitle.Text = dgvRecord.CurrentRow.Cells[2].Value.ToString();
@@ -627,6 +649,11 @@ namespace Video_Rental
 
         }
 
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
         private void btnRental_Click(object sender, EventArgs e)
         {
             try
@@ -640,9 +667,34 @@ namespace Video_Rental
                 qry = "";
                 qry = "select * from tbRental";
                 tbl = obj.getRecords(qry);
+                DataTable tblnew = new DataTable();
                 if (tbl.Rows.Count > 0)
                 {
-                    dgvRecord.DataSource = tbl;
+                    tblnew.Columns.Add("Rental_id");
+                    tblnew.Columns.Add("Movie_ID");
+                    tblnew.Columns.Add("Customer_ID");
+                    tblnew.Columns.Add("Issue_Date");
+                    tblnew.Columns.Add("Return_Date");
+                    //using the statement to pass the record to the Table from the Data table 
+
+                    for (int y = 0; y < tbl.Rows.Count - 1; y++)
+                    {
+                        DataRow row = tblnew.NewRow();
+                        row["Rental_id"] = Convert.ToString(tbl.Rows[y]["ID"]);
+                        row["Movie_ID"] = Convert.ToString(tbl.Rows[y]["MID"]);
+                        row["Customer_ID"] = Convert.ToString(tbl.Rows[y]["CID"]);
+                        row["Issue_Date"] = Convert.ToString(tbl.Rows[y]["IssueDate"]);
+                        row["Return_Date"] = Convert.ToString(tbl.Rows[y]["ReturnDate"]);
+
+                      tblnew.Rows.Add(row);
+
+                    }
+
+
+
+
+
+                    dgvRecord.DataSource = tblnew;
                 }
                 Rental_ID = 1;
 
@@ -669,9 +721,37 @@ namespace Video_Rental
                 qry = "";
                 qry = "select * from tbVideos";
                 tbl = obj.getRecords(qry);
+                DataTable tblnew = new DataTable();
                 if (tbl.Rows.Count > 0)
                 {
-                    dgvRecord.DataSource = tbl;
+                    tblnew.Columns.Add("Video_id");
+                    tblnew.Columns.Add("Ratting");
+                    tblnew.Columns.Add("Title");
+                    tblnew.Columns.Add("Year");
+                    tblnew.Columns.Add("Cost");
+                    tblnew.Columns.Add("Copies");
+                    tblnew.Columns.Add("Plot");
+                    tblnew.Columns.Add("Genre_Info");
+                   //using the statement to pass the record to the Table from the Data table 
+
+                    for (int y = 0; y < tbl.Rows.Count - 1; y++)
+                    {
+                        DataRow row = tblnew.NewRow();
+                        row["Video_ID"] = Convert.ToString(tbl.Rows[y]["ID"]);
+                        row["Ratting"] = Convert.ToString(tbl.Rows[y]["Rating"]);
+                        row["Title"] = Convert.ToString(tbl.Rows[y]["VTitle"]);
+                        row["Year"] = Convert.ToString(tbl.Rows[y]["VYear"]);
+                        row["Cost"] = Convert.ToString(tbl.Rows[y]["VCost"]);
+                        row["Copies"] = Convert.ToString(tbl.Rows[y]["VCopy"]);
+                        row["Plot"] = Convert.ToString(tbl.Rows[y]["VPlot"]);
+                        row["Genre_Info"] = Convert.ToString(tbl.Rows[y]["VGenre"]);
+                        tblnew.Rows.Add(row);
+
+                    }
+
+
+
+                    dgvRecord.DataSource = tblnew;
                 }
                 Video_ID = 1;
                 Rental_ID = 0;

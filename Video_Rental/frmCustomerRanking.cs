@@ -27,10 +27,13 @@ namespace Video_Rental
         {
             try
             {
+                //objet of DBClass and DataTable Class 
                 DbClass obj = new DbClass();
                 DataTable tblnew = new DataTable();
+                //LocalVariable to access the 
                 String qry = "";
                 int y = 0;
+                //select the Data from the Table and then pass it to the Data Table 
                 qry = "select * from tbCustomerRentalCount ORDER BY  CCount DESC";
                 DataTable tbl = new DataTable();
                 tbl = obj.getRecords(qry);
@@ -38,16 +41,16 @@ namespace Video_Rental
                 {
                     tblnew.Columns.Add("Customer_id");
                     tblnew.Columns.Add("No_of_Times");
-                    for (y = 0; y < tbl.Rows.Count - 1; y++)
-                    {
+                    //using the statement to pass the record to the Table from the Data table 
                         DataRow row = tblnew.NewRow();
-                        row["Customer_id"] = Convert.ToString(tbl.Rows[y]["CID"]);
-                        row["No_of_Times"] = Convert.ToString(tbl.Rows[y]["CCount"]);
+                        row["Customer_id"] = Convert.ToString(tbl.Rows[0]["CID"]);
+                        row["No_of_Times"] = Convert.ToString(tbl.Rows[0]["CCount"]);
                         tblnew.Rows.Add(row);
-                    }
+                   
                    
 
                 }
+                // Pass the DAta to Data Grid view to Display
                 dataGridView1.DataSource = tblnew;
             }
             catch (Exception except)
